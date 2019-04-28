@@ -6,9 +6,7 @@ import { HeroService } from './hero.service';
 describe('HeroService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [
-        HttpClientModule
-      ]
+      imports: [HttpClientModule]
     });
   });
 
