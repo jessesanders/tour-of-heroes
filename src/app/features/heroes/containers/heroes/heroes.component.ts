@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { HeroService } from '@core/hero.service';
-import { Hero } from '@core/hero';
+import { HeroService } from '../../../../core/hero.service';
+import { Hero } from '../../../../core/hero';
 
 @Component({
   selector: 'app-heroes',

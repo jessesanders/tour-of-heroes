@@ -3,8 +3,8 @@ import { RouterTestingModule } from '@angular/router/testing';
 
 import { HeroesComponent } from './heroes.component';
 import { HeroesListComponent } from './../../components/heroes-list/heroes-list.component';
-import { HeroService } from '@core/hero.service';
-import { HeroMockService } from '@core/hero.mock.service';
+import { HeroService } from '../../../../core/hero.service';
+import { HeroMockService } from '../../../../core/hero.mock.service';
 
 describe('HeroesComponent', () => {
   let component: HeroesComponent;

@@ -3,8 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { Observable } from 'rxjs';
 
-import { Hero } from '@core/hero';
-import { HeroService } from '@core/hero.service';
+import { Hero } from '../../../../core/hero';
+import { HeroService } from '../../../../core/hero.service';
 
 @Component({
   selector: 'app-hero-detail',

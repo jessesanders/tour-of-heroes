@@ -1,7 +1,7 @@
 import { TestBed, async } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
-import { MessagesComponent } from '@shared/components/messages/messages.component';
+import { MessagesComponent } from './shared/components/messages/messages.component';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {

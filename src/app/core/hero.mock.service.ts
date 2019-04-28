@@ -1,5 +1,5 @@
 import { Observable, of } from 'rxjs';
-import { Hero } from '@core/hero';
+import { Hero } from './hero';
 
 export class HeroMockService {
   getHeroes(): Observable<Hero[]> {

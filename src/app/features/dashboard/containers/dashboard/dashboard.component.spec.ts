@@ -1,10 +1,10 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
 
 import { DashboardComponent } from './dashboard.component';
-import { TopHeroesListComponent } from '@features/dashboard/components/top-heroes-list/top-heroes-list.component';
-import { HeroService } from '@core/hero.service';
-import { RouterTestingModule } from '@angular/router/testing';
-import { HeroMockService } from '@core/hero.mock.service';
+import { TopHeroesListComponent } from '../../components/top-heroes-list/top-heroes-list.component';
+import { HeroService } from '../../../../core/hero.service';
+import { HeroMockService } from '../../../../core/hero.mock.service';
 
 describe('DashboardComponent', () => {
   let component: DashboardComponent;

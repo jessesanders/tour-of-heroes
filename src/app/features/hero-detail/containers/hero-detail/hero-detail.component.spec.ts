@@ -4,8 +4,8 @@ import { FormsModule } from '@angular/forms';
 
 import { HeroComponent } from './../../components/hero/hero.component';
 import { HeroDetailComponent } from './hero-detail.component';
-import { HeroService } from '@core/hero.service';
-import { HeroMockService } from '@core/hero.mock.service';
+import { HeroService } from '../../../../core/hero.service';
+import { HeroMockService } from '../../../../core/hero.mock.service';
 
 describe('HeroDetailComponent', () => {
   let component: HeroDetailComponent;
