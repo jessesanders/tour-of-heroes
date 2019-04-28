@@ -2,9 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { Observable } from 'rxjs';
+import { Store, select } from '@ngrx/store';
 
+import { selectedHero } from './../../../../state/hero/index';
+import { LoadHeroById } from './../../../../state/hero/hero.actions';
+import { heroes } from '../../../../state/hero';
+import { AppState } from '../../../../state/app.interfaces';
 import { Hero } from '../../../../core/hero';
-import { HeroService } from '../../../../core/hero.service';
 
 @Component({
   selector: 'app-hero-detail',
@@ -15,14 +19,15 @@ export class HeroDetailComponent implements OnInit {
   hero$: Observable<Hero>;
 
   constructor(
+    private store: Store<AppState>,
     private route: ActivatedRoute,
-    private heroService: HeroService,
-    private location: Location
-  ) {}
+    private location: Location) {
+  }
 
   ngOnInit(): void {
     const id = +this.route.snapshot.paramMap.get('id');
-    this.hero$ = this.heroService.getHero(id);
+    this.store.dispatch(new LoadHeroById({ id: id }));
+    this.hero$ = this.store.pipe(select(selectedHero));
   }
 
   goBack(): void {

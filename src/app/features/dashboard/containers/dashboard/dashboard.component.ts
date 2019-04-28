@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { Store, select } from '@ngrx/store';
 
-import { HeroService } from '../../../../core/hero.service';
+import { SearchAllHeroEntities } from './../../../../state/hero/hero.actions';
+import { topHeroes } from '../../../../state/hero';
+import { AppState } from '../../../../state/app.interfaces';
 import { Hero } from '../../../../core/hero';
 
 @Component({
@@ -10,13 +13,12 @@ import { Hero } from '../../../../core/hero';
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent {
   heroes$: Observable<Hero[]>;
 
-  constructor(private heroService: HeroService, private router: Router) {}
-
-  ngOnInit() {
-    this.heroes$ = this.heroService.getTopHeroes();
+  constructor(private store: Store<AppState>, private router: Router) {
+    this.heroes$ = this.store.pipe(select(topHeroes));
+    this.store.dispatch(new SearchAllHeroEntities());
   }
 
   onHeroClicked(hero: Hero) {

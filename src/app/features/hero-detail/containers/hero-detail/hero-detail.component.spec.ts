@@ -1,11 +1,11 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { FormsModule } from '@angular/forms';
+import { Store } from '@ngrx/store';
 
 import { HeroComponent } from './../../components/hero/hero.component';
 import { HeroDetailComponent } from './hero-detail.component';
-import { HeroService } from '../../../../core/hero.service';
-import { HeroMockService } from '../../../../core/hero.mock.service';
+import { TestStore } from '../../../../testing/test.store';
 
 describe('HeroDetailComponent', () => {
   let component: HeroDetailComponent;
@@ -15,7 +15,7 @@ describe('HeroDetailComponent', () => {
     TestBed.configureTestingModule({
       imports: [FormsModule, RouterTestingModule],
       declarations: [HeroDetailComponent, HeroComponent],
-      providers: [{ provide: HeroService, useClass: HeroMockService }]
+      providers: [{ provide: Store, useClass: TestStore }]
     }).compileComponents();
   }));
 
