@@ -1,6 +1,11 @@
 import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
 import { FormsModule } from "@angular/forms";
+import { HttpClientModule } from '@angular/common/http';
+
+import { HttpClientInMemoryWebApiModule } from "angular-in-memory-web-api";
+
+import { InMemHeroService } from "./inMemHeroService";
 
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
@@ -22,6 +27,8 @@ import { DashboardComponent } from "./dashboard/dashboard.component";
   imports: [
     BrowserModule,
     AppRoutingModule,
+    HttpClientModule,
+    HttpClientInMemoryWebApiModule.forRoot(InMemHeroService),
     FormsModule,
     StoreDevtoolsModule.instrument({
       maxAge: 25,
