@@ -1,39 +1,21 @@
-import { BrowserModule } from "@angular/platform-browser";
-import { NgModule } from "@angular/core";
-import { FormsModule } from "@angular/forms";
-import { HttpClientModule } from '@angular/common/http';
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
 
-import { HttpClientInMemoryWebApiModule } from "angular-in-memory-web-api";
+import { AppRoutingModule } from './app-routing.module';
+import { CoreModule } from './core/core.module';
+import { FeaturesModule } from './features/features.module';
+import { SharedModule } from '@shared/shared.module';
 
-import { InMemHeroService } from "./inMemHeroService";
-
-import { AppRoutingModule } from "./app-routing.module";
-import { AppComponent } from "./app.component";
-import { StoreDevtoolsModule } from "@ngrx/store-devtools";
-import { environment } from "../environments/environment";
-import { HeroesComponent } from "./heroes/heroes.component";
-import { HeroDetailComponent } from "./hero-detail/hero-detail.component";
-import { MessagesComponent } from "./messages/messages.component";
-import { DashboardComponent } from "./dashboard/dashboard.component";
+import { AppComponent } from './app.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    HeroesComponent,
-    HeroDetailComponent,
-    MessagesComponent,
-    DashboardComponent
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule,
-    HttpClientInMemoryWebApiModule.forRoot(InMemHeroService),
-    FormsModule,
-    StoreDevtoolsModule.instrument({
-      maxAge: 25,
-      logOnly: environment.production
-    })
+    CoreModule,
+    FeaturesModule,
+    SharedModule
   ],
   providers: [],
   bootstrap: [AppComponent]

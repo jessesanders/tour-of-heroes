@@ -1,0 +1,4 @@
+<app-heroes-list
+  [heroes]="heroes$ | async"
+  (heroClicked)="onHeroClicked($event)"
+></app-heroes-list>

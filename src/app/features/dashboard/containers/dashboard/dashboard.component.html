@@ -1,0 +1,4 @@
+<app-top-heroes-list
+  [heroes]="heroes$ | async"
+  (heroClicked)="onHeroClicked($event)"
+></app-top-heroes-list>
