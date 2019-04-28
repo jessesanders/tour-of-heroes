@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { Hero } from './hero';
@@ -9,28 +9,43 @@ import { MessageService } from './message.service';
 
 @Injectable({ providedIn: 'root' })
 export class HeroService {
+  private mheroes$ = new BehaviorSubject<Hero[]>([]);
+  private mhero$ = new BehaviorSubject<Hero>(null);
+
+  get heroes$(): Observable<Hero[]> {
+    return this.mheroes$;
+  }
+
+  get hero$(): Observable<Hero> {
+    return this.mhero$;
+  }
+
   constructor(
     private messageService: MessageService,
     private http: HttpClient
   ) {}
 
-  getHeroes(): Observable<Hero[]> {
+  getHeroes() {
     // TODO: send the message _after_ fetching the heroes
     this.messageService.add('HeroService: fetched heroes');
-    return this.http.get<Hero[]>('/api/heroes');
+    this.http
+      .get<Hero[]>('/api/heroes')
+      .subscribe(heroes => this.mheroes$.next(heroes));
   }
 
-  getTopHeroes(): Observable<Hero[]> {
+  getTopHeroes() {
     // TODO: send the message _after_ fetching the heroes
     this.messageService.add('HeroService: fetched top heroes');
-    return this.http
+    this.http
       .get<Hero[]>('/api/heroes')
-      .pipe(map(hereos => hereos.slice(1, 5)));
+      .subscribe(heroes => this.mheroes$.next(heroes.slice(1, 5)));
   }
 
-  getHero(id: number): Observable<Hero> {
+  getHero(id: number) {
     // TODO: send the message _after_ fetching the hero
     this.messageService.add(`HeroService: fetched hero id=${id}`);
-    return this.http.get<Hero>(`/api/heroes/${id}`);
+    this.http
+      .get<Hero>(`/api/heroes/${id}`)
+      .subscribe(hero => this.mhero$.next(hero));
   }
 }
