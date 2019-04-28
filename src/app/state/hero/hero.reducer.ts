@@ -1,38 +1,74 @@
+import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
 import { Hero } from '../../core/hero';
+import { HeroActions, HeroActionTypes } from './hero.actions';
 
-import * as heroActions from './hero.actions';
-
-export interface HeroState {
-  heroes: Hero[];
-  hero: Hero;
+export interface HeroState extends EntityState<Hero> {
+  // additional entities state properties
+  selectedId: number;
+  loading: boolean;
+  error: string;
 }
 
-export const initialState: HeroState = {
-  heroes: [],
-  hero: null
-};
+export const adapter: EntityAdapter<Hero> = createEntityAdapter<Hero>();
 
-export function heroReducer(
-  state = initialState,
-  action: heroActions.HeroActions
-): HeroState {
+export const initialState: HeroState = adapter.getInitialState({
+  // additional hero state properties
+  selectedId: null,
+  loading: false,
+  error: ''
+});
+
+export function heroReducer(state = initialState, action: HeroActions): HeroState {
   switch (action.type) {
-    case heroActions.HeroActionTypes.SearchAllHeroEntitiesSuccess: {
-      return {
-        hero: null,
-        heroes: action.payload.result
-      };
-    }
 
-    case heroActions.HeroActionTypes.LoadHeroByIdSuccess: {
+    case HeroActionTypes.SearchAllHeroEntities:
       return {
-        heroes: [],
-        hero: action.payload.result
+        ...adapter.removeAll(state),
+        loading: true,
+        error: ''
       };
-    }
 
-    default: {
+    case HeroActionTypes.SearchAllHeroEntitiesSuccess:
+      return {
+        ...adapter.addAll(action.payload.result, state),
+        loading: false,
+        error: ''
+      };
+
+    case HeroActionTypes.SearchAllHeroEntitiesFail:
+      return {
+        ...state,
+        loading: false,
+        error: 'Hero search failed: ' + action.payload.error
+      };
+
+    case HeroActionTypes.LoadHeroById:
+      return {
+        ...adapter.removeAll(state),
+        selectedId: action.payload.id,
+        loading: true,
+        error: ''
+      };
+
+    case HeroActionTypes.LoadHeroByIdSuccess:
+      return {
+        ...adapter.addOne(action.payload.result, state),
+        loading: false,
+        error: ''
+      };
+
+    case HeroActionTypes.LoadHeroByIdFail:
+      return {
+        ...state,
+        loading: false,
+        error: 'Hero load failed: ' + action.payload.error
+      };
+
+    default:
       return state;
-    }
   }
 }
+
+export const getSelectedId = (state: HeroState) => state.selectedId;
+export const getLoading = (state: HeroState) => state.loading;
+export const getError = (state: HeroState) => state.error;
