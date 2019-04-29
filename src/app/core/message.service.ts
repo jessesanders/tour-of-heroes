@@ -1,16 +1,25 @@
 import { Injectable } from '@angular/core';
 
-@Injectable({
-  providedIn: 'root'
-})
-export class MessageService {
-  messages: string[] = [];
+import { Store, select } from '@ngrx/store';
+import { Observable } from 'rxjs';
 
-  add(message: string) {
-    this.messages.push(message);
+import { messages } from '../state/message';
+import { ClearMessages } from '../state/message/message.actions';
+import { AppState } from '../state/app.interfaces';
+
+@Injectable({ providedIn: 'root' })
+export class MessageService {
+  constructor(
+    private store: Store<AppState>
+  ) { }
+
+  get messages$(): Observable<string[]> {
+    return this.store.pipe(
+      select(messages)
+    );
   }
 
   clear() {
-    this.messages = [];
+    this.store.dispatch(new ClearMessages());
   }
 }

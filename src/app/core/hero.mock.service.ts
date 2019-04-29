@@ -13,4 +13,10 @@ export class HeroMockService {
   getHero(id: number): Observable<Hero> {
     return of(null);
   }
+
+  loadHeroes() {
+  }
+
+  loadHero(id: number) {
+  }
 }

@@ -6,6 +6,8 @@ import { Store } from '@ngrx/store';
 import { HeroComponent } from './../../components/hero/hero.component';
 import { HeroDetailComponent } from './hero-detail.component';
 import { TestStore } from '../../../../testing/test.store';
+import { HeroService } from '../../../../core/hero.service';
+import { HeroMockService } from '../../../../core/hero.mock.service';
 
 describe('HeroDetailComponent', () => {
   let component: HeroDetailComponent;
@@ -15,7 +17,8 @@ describe('HeroDetailComponent', () => {
     TestBed.configureTestingModule({
       imports: [FormsModule, RouterTestingModule],
       declarations: [HeroDetailComponent, HeroComponent],
-      providers: [{ provide: Store, useClass: TestStore }]
+      providers: [{ provide: Store, useClass: TestStore },
+      { provide: HeroService, useClass: HeroMockService }]
     }).compileComponents();
   }));
 

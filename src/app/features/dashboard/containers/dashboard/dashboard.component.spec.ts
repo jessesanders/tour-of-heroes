@@ -16,7 +16,8 @@ describe('DashboardComponent', () => {
     TestBed.configureTestingModule({
       imports: [RouterTestingModule],
       declarations: [DashboardComponent, TopHeroesListComponent],
-      providers: [{ provide: Store, useClass: TestStore } ]
+      providers: [{ provide: Store, useClass: TestStore },
+      { provide: HeroService, useClass: HeroMockService }]
     }).compileComponents();
   }));
 

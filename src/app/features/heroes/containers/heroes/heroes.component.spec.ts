@@ -5,6 +5,8 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { HeroesComponent } from './heroes.component';
 import { HeroesListComponent } from './../../components/heroes-list/heroes-list.component';
 import { TestStore } from '../../../../testing/test.store';
+import { HeroService } from '../../../../core/hero.service';
+import { HeroMockService } from '../../../../core/hero.mock.service';
 
 describe('HeroesComponent', () => {
   let component: HeroesComponent;
@@ -14,7 +16,8 @@ describe('HeroesComponent', () => {
     TestBed.configureTestingModule({
       imports: [RouterTestingModule],
       declarations: [HeroesComponent, HeroesListComponent],
-      providers: [{ provide: Store, useClass: TestStore }]
+      providers: [{ provide: Store, useClass: TestStore },
+      { provide: HeroService, useClass: HeroMockService }]
     }).compileComponents();
   }));
 

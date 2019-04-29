@@ -4,6 +4,7 @@ import { Observable, of } from 'rxjs';
 import {
   exhaustMap,
   map,
+  flatMap,
   catchError,
   switchMap
 } from 'rxjs/operators';
@@ -21,18 +22,20 @@ import {
 } from './hero.actions';
 import { Hero } from '../../core/hero';
 import { HeroService } from '../../core/hero.service';
+import { AddMessage } from '../message/message.actions';
 
 @Injectable()
 export class HeroEffects {
   @Effect()
-  search: Observable<Action> = this.actions$.pipe(
+  search = this.actions$.pipe(
     ofType<SearchAllHeroEntities>(HeroActionTypes.SearchAllHeroEntities),
     exhaustMap(() =>
       this.service.getHeroes().pipe(
-        map(
-          (entities: Array<Hero>) =>
-            new SearchAllHeroEntitiesSuccess({ result: entities })
-        ),
+        flatMap(
+          (entities: Array<Hero>) => [
+            new SearchAllHeroEntitiesSuccess({ result: entities }),
+            new AddMessage('HeroService: fetched heroes')
+          ]),
         catchError(({ message }) =>
           of(new SearchAllHeroEntitiesFail({ error: message }))
         )
@@ -41,11 +44,14 @@ export class HeroEffects {
   );
 
   @Effect()
-  loadById: Observable<Action> = this.actions$.pipe(
+  loadById = this.actions$.pipe(
     ofType<LoadHeroById>(HeroActionTypes.LoadHeroById),
     switchMap(action =>
       this.service.getHero(action.payload.id).pipe(
-        map((hero: Hero) => new LoadHeroByIdSuccess({ result: hero })),
+        flatMap((hero: Hero) => [
+          new LoadHeroByIdSuccess({ result: hero }),
+          new AddMessage(`HeroService: fetched hero id=${hero.id}`)
+        ]),
         catchError(({ message }) =>
           of(new LoadHeroByIdFail({ error: message }))
         )
@@ -53,5 +59,6 @@ export class HeroEffects {
     )
   );
 
-  constructor(private actions$: Actions, private service: HeroService) {}
+  constructor(private actions$: Actions,
+    private service: HeroService) { }
 }
