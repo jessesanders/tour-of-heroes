@@ -1,0 +1,54 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`hero selectors should return all heroes 1`] = `
+Array [
+  Object {
+    "id": 1,
+    "name": "Bob",
+  },
+  Object {
+    "id": 2,
+    "name": "Sue",
+  },
+  Object {
+    "id": 3,
+    "name": "Mary",
+  },
+  Object {
+    "id": 4,
+    "name": "Jim",
+  },
+  Object {
+    "id": 5,
+    "name": "Jane",
+  },
+]
+`;
+
+exports[`hero selectors should return selected Hero 1`] = `
+Object {
+  "id": 3,
+  "name": "Mary",
+}
+`;
+
+exports[`hero selectors should return top 4 heroes 1`] = `
+Array [
+  Object {
+    "id": 2,
+    "name": "Sue",
+  },
+  Object {
+    "id": 3,
+    "name": "Mary",
+  },
+  Object {
+    "id": 4,
+    "name": "Jim",
+  },
+  Object {
+    "id": 5,
+    "name": "Jane",
+  },
+]
+`;

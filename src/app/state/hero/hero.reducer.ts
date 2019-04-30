@@ -11,14 +11,14 @@ export interface HeroState extends EntityState<Hero> {
 
 export const adapter: EntityAdapter<Hero> = createEntityAdapter<Hero>();
 
-export const initialState: HeroState = adapter.getInitialState({
+export const initialHeroState: HeroState = adapter.getInitialState({
   // additional hero state properties
   selectedId: null,
   loading: false,
   error: ''
 });
 
-export function heroReducer(state = initialState, action: HeroActions): HeroState {
+export function heroReducer(state = initialHeroState, action: HeroActions): HeroState {
   switch (action.type) {
 
     case HeroActionTypes.SearchAllHeroEntities:

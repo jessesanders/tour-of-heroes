@@ -1,0 +1,120 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`heroReducer upon LoadHeroById should remove hero entities, set selected id, and clear any error 1`] = `
+Object {
+  "entities": Object {},
+  "error": "",
+  "ids": Array [],
+  "loading": true,
+  "selectedId": 8675309,
+}
+`;
+
+exports[`heroReducer upon LoadHeroByIdFail should set loading to false and echo the error 1`] = `
+Object {
+  "entities": Object {},
+  "error": "Hero load failed: test load by id error",
+  "ids": Array [],
+  "loading": false,
+  "selectedId": null,
+}
+`;
+
+exports[`heroReducer upon LoadHeroByIdSuccess should add the given Hero, set loading to false, and clear any error 1`] = `
+Object {
+  "entities": Object {
+    "54": Object {
+      "id": 54,
+      "name": "Test name",
+    },
+  },
+  "error": "",
+  "ids": Array [
+    54,
+  ],
+  "loading": false,
+  "selectedId": null,
+}
+`;
+
+exports[`heroReducer upon SearchAllHeroEntities should remove Hero entities, set loading to true, and clear any error 1`] = `
+Object {
+  "entities": Object {},
+  "error": "",
+  "ids": Array [],
+  "loading": true,
+  "selectedId": null,
+}
+`;
+
+exports[`heroReducer upon SearchAllHeroEntitiesFail should set loading to false and echo the error 1`] = `
+Object {
+  "entities": Object {},
+  "error": "Hero search failed: test search error",
+  "ids": Array [],
+  "loading": false,
+  "selectedId": null,
+}
+`;
+
+exports[`heroReducer upon SearchAllHeroEntitiesSuccess should add Hero entities, set loading to false, and clear any error 1`] = `
+Object {
+  "entities": Object {
+    "1": Object {
+      "id": 1,
+      "name": "Test name",
+    },
+    "10": Object {
+      "id": 10,
+      "name": "Test name",
+    },
+    "2": Object {
+      "id": 2,
+      "name": "Test name",
+    },
+    "3": Object {
+      "id": 3,
+      "name": "Test name",
+    },
+    "4": Object {
+      "id": 4,
+      "name": "Test name",
+    },
+    "5": Object {
+      "id": 5,
+      "name": "Test name",
+    },
+    "6": Object {
+      "id": 6,
+      "name": "Test name",
+    },
+    "7": Object {
+      "id": 7,
+      "name": "Test name",
+    },
+    "8": Object {
+      "id": 8,
+      "name": "Test name",
+    },
+    "9": Object {
+      "id": 9,
+      "name": "Test name",
+    },
+  },
+  "error": "",
+  "ids": Array [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+  ],
+  "loading": false,
+  "selectedId": null,
+}
+`;

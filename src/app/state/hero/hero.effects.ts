@@ -31,11 +31,10 @@ export class HeroEffects {
     ofType<SearchAllHeroEntities>(HeroActionTypes.SearchAllHeroEntities),
     exhaustMap(() =>
       this.service.getHeroes().pipe(
-        flatMap(
-          (entities: Array<Hero>) => [
-            new SearchAllHeroEntitiesSuccess({ result: entities }),
-            new AddMessage('HeroService: fetched heroes')
-          ]),
+        map(
+          (entities: Hero[]) =>
+            new SearchAllHeroEntitiesSuccess({ result: entities })
+          ),
         catchError(({ message }) =>
           of(new SearchAllHeroEntitiesFail({ error: message }))
         )
@@ -48,10 +47,9 @@ export class HeroEffects {
     ofType<LoadHeroById>(HeroActionTypes.LoadHeroById),
     switchMap(action =>
       this.service.getHero(action.payload.id).pipe(
-        flatMap((hero: Hero) => [
-          new LoadHeroByIdSuccess({ result: hero }),
-          new AddMessage(`HeroService: fetched hero id=${hero.id}`)
-        ]),
+        map((hero: Hero) =>
+          new LoadHeroByIdSuccess({ result: hero })
+        ),
         catchError(({ message }) =>
           of(new LoadHeroByIdFail({ error: message }))
         )
