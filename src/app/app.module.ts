@@ -22,7 +22,6 @@ import { AppComponent } from './app.component';
     BrowserModule,
     AppRoutingModule,
     CoreModule,
-    FeaturesModule,
     SharedModule,
     StoreModule.forRoot({}),
     EffectsModule.forRoot([]),
